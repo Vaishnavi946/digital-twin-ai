@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 
+const API = import.meta.env.VITE_API_URL;
+
 const NAV = [['Dashboard', '/dashboard'], ['Simulator', '/simulate'], ['Risk', '/risk'], ['Predict', '/predict'], ['Goals', '/goals'], ['Chat', '/chat']]
 
 export default function Predict() {
@@ -23,7 +25,7 @@ export default function Predict() {
   const runPrediction = async () => {
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/predict/savings', {
+      const res = await fetch(`${API}/api/predict/savings`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: 'user_001', monthly_income: form.income, monthly_expenses: form.expenses, current_savings: form.savings, total_debt: savedProfile.total_debt || 150000, monthly_emi: savedProfile.monthly_emi || 12000, monthly_investment: form.investment, risk_appetite: savedProfile.risk_appetite || 'medium' })
       })

@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+const API = import.meta.env.VITE_API_URL;
+
 const STEPS = [
   { id: 1, title: 'Income & Expenses',   icon: '💰', desc: 'Tell us about your monthly cash flow' },
   { id: 2, title: 'Savings & Debt',      icon: '🏦', desc: 'Your current financial position' },
@@ -57,7 +59,7 @@ export default function Onboarding() {
     try {
       const token = localStorage.getItem('dt_token')
       if (token) {
-        await fetch('http://localhost:8000/api/auth/profile', {
+        await fetch(`${API}/api/auth/profile`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',

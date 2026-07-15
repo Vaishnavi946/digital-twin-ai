@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+const API = import.meta.env.VITE_API_URL;
+
 export default function Auth() {
   const navigate = useNavigate()
   const [mode, setMode] = useState('login')
@@ -31,8 +33,8 @@ export default function Auth() {
 
     try {
       const endpoint = mode === 'signup'
-        ? 'http://localhost:8000/api/auth/signup'
-        : 'http://localhost:8000/api/auth/login'
+    ? `${API}/api/auth/signup`
+    : `${API}/api/auth/login`
 
       const body = mode === 'signup'
         ? { full_name: form.name, email: form.email, password: form.password }
@@ -61,7 +63,7 @@ export default function Auth() {
       // On login — fetch and restore saved profile from backend
       if (mode === 'login') {
         try {
-          const profileRes = await fetch('http://localhost:8000/api/auth/me', {
+          const profileRes = await fetch(`${API}/api/auth/me`, {
             headers: { 'Authorization': `Bearer ${data.access_token}` }
           })
           const profileData = await profileRes.json()

@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, ReferenceLine } from 'recharts'
 
+const API = import.meta.env.VITE_API_URL;
+
 const NAV = [['Dashboard', '/dashboard'], ['Simulator', '/simulate'], ['Risk', '/risk'], ['Predict', '/predict'], ['Goals', '/goals'], ['Chat', '/chat']]
 
 export default function XAI() {
@@ -24,7 +26,7 @@ export default function XAI() {
   const runXAI = async () => {
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/xai/explain', {
+      const res = await fetch(`${API}/api/xai/explain`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

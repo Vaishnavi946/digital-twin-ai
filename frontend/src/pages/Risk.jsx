@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
 
+const API = import.meta.env.VITE_API_URL;
+
 const NAV = [['Dashboard', '/dashboard'], ['Simulator', '/simulate'], ['Risk', '/risk'], ['Predict', '/predict'], ['Goals', '/goals'], ['Chat', '/chat']]
 
 export default function Risk() {
@@ -23,7 +25,7 @@ export default function Risk() {
   const runRisk = async () => {
     setLoading(true)
     try {
-      const res = await fetch('http://localhost:8000/api/finance/risk-score', {
+      const res = await fetch(`${API}/api/finance/risk-score`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ user_id: 'user_001', monthly_income: form.income, monthly_expenses: form.expenses, current_savings: form.savings, total_debt: form.debt, monthly_emi: form.emi, monthly_investment: savedProfile.monthly_investment || 8000, risk_appetite: savedProfile.risk_appetite || 'medium' })
       })

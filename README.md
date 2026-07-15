@@ -47,7 +47,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser. The API docs are at `http://localhost:8000/docs`.
+Open `http://localhost:5173` in your browser. The API docs are at `https://digital-twin-ai.onrender.com/docs`.
 
 ---
 
